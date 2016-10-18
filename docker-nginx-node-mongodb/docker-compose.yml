@@ -1,0 +1,14 @@
+mongodb:
+  image: mongo
+  ports:
+    - "27017:27017"
+proxy:
+  build: proxy
+  ports:
+    - "80:80"
+app:
+  build: app
+  links:
+    - mongodb:mongodb
+  ports:
+    - "8080:8080"
