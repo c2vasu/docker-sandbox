@@ -3,7 +3,8 @@ node {
     gitRepoUrl = 'https://github.com/c2vasu/docker-sandbox.git'
 
     imagename = "nexus.ana.corp.aviva.com:8443/sandbox-app"
-    env.BUILD_TARGET = imagename + ":latest"
+    env.BUILD_TARGET = imagename + ":" + env.BRANCH_NAME + "-" + env.BUILD_NUMBER
+    env.TAG_LATEST = imagename + ":latest"
 
     imagename2 = "nexus.ana.corp.aviva.com:8443/sandbox-nginx"
     env.BUILD_TARGET2 = imagename2 + ":latest"
@@ -24,4 +25,9 @@ Do not change anything before this line
     stage 'push nginx Image'
     sh 'docker push ${BUILD_TARGET2}'
 
+ if (env.BRANCH_NAME =='master') {
+        stage 'on master branch'
+        sh 'docker tag ${BUILD_TARGET} ${TAG_LATEST}'
+        sh 'docker push ${TAG_LATEST}'
+    }
 }
