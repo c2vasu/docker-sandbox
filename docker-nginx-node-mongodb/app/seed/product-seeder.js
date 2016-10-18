@@ -3,7 +3,7 @@ var Product = require('../models/product');
 var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/shopping', function(err) {
+mongoose.connect('mongodb://sandbox-mongo/shopping', function(err) {
   if (err) {
     console.log('Failed connecting to MongoDB!');
   } else {
