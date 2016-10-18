@@ -17,7 +17,7 @@ var userRoutes = require('./routes/user');
 var app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/shopping', function(err) {
+mongoose.connect('mongodb://sandbox-mongo/shopping', function(err) {
   if (err) {
     console.log('Failed connecting to MongoDB!');
   } else {
