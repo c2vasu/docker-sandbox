@@ -16,6 +16,8 @@ node {
 Do not change anything before this line
 */
     stage 'Build web Image'
+    sh 'env'
+    sh 'echo $BRANCH_NAME'
     sh 'docker build -t ${BUILD_TARGET} docker-nginx-node-mongodb/app/'
     stage 'push web Image'
     sh 'docker push ${BUILD_TARGET}'
