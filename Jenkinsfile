@@ -16,8 +16,9 @@ node {
 Do not change anything before this line
 */
     stage 'Build web Image'
-    sh 'env'
-    sh 'echo $BRANCH_NAME'
+    env.gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+    sh 'echo $BRANCH_NAME $gitCommit'
+
     sh 'docker build -t ${BUILD_TARGET} docker-nginx-node-mongodb/app/'
     stage 'push web Image'
     sh 'docker push ${BUILD_TARGET}'
